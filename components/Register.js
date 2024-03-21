@@ -3,7 +3,9 @@ import { ImageBackground, View } from "react-native";
 import { Input, Button, Text } from '@rneui/themed';
 import { styles } from "./Styles";
 import md5 from 'md5';
-import FlashMessage, {showMessage} from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import axios from 'axios';
 
 export const Register = ({ navigation }) => {
@@ -11,12 +13,23 @@ export const Register = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [showQuestion, setShowQuestion] = useState(false); // Estado para mostrar la pregunta secreta
 
   const handleRegister = async () => {
     // Validar que las contraseñas coincidan
     if (password !== confirmPassword) {
       showMessage({
         message: "Las contraseñas no coinciden",
+        type: "danger",
+      });
+      return;
+    }
+
+    // Validar la contraseña
+    if (!validatePassword(password)) {
+      showMessage({
+        message: "Contraseña no segura",
+        description: "La contraseña debe tener al menos una mayúscula, una minúscula, un número y un carácter especial. Además, debe tener al menos 8 caracteres.",
         type: "danger",
       });
       return;
@@ -42,12 +55,14 @@ export const Register = ({ navigation }) => {
       const response = await axios.post('https://ecoserver-zopz.onrender.com/user', data);
 
       if (response.status === 200) {
+        // Mostrar la pregunta secreta
+        setShowQuestion(true);
+        // Mostrar mensaje de éxito
         showMessage({
           message: "Registro exitoso",
           description: `¡Bienvenido a Eco-Nido, ${username}!`,
           type: "success",
         });
-        navigation.navigate("Login");
       } else {
         showMessage({
           message: "Error en el registro",
@@ -68,6 +83,11 @@ export const Register = ({ navigation }) => {
     }
   };
 
+  const validatePassword = (password) => {
+    // Use regex to enforce password criteria
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#.])[A-Za-z\d@$!%*?&#.]{8,}$/;
+    return regex.test(password);
+  };
 
   return (
     <ImageBackground source={require('../assets/wallpaper.jpg')} style={styles.backgroundImage}>
@@ -76,6 +96,7 @@ export const Register = ({ navigation }) => {
         <View style={styles.container}>
           <Input
             label="Nombre de usuario"
+            leftIcon={<MaterialCommunityIcons name='account' color="#f0f0f0" size={32} />}
             placeholder="Ingrese el nombre de usuario"
             value={username}
             onChangeText={(text) => setUsername(text)}
@@ -85,6 +106,7 @@ export const Register = ({ navigation }) => {
           />
           <Input
             label="Correo electrónico"
+            leftIcon={<MaterialIcons name='email' color="#f0f0f0" size={32} />}
             placeholder="Ingrese su correo electrónico"
             value={email}
             onChangeText={(text) => setEmail(text)}
@@ -94,6 +116,7 @@ export const Register = ({ navigation }) => {
           />
           <Input
             label="Contraseña"
+            leftIcon={<MaterialIcons name='lock' color="#f0f0f0" size={32} />}
             placeholder="Ingresa tu contraseña"
             secureTextEntry
             value={password}
@@ -104,6 +127,7 @@ export const Register = ({ navigation }) => {
           />
           <Input
             label="Confirmar contraseña"
+            leftIcon={<MaterialIcons name='lock' color="#f0f0f0" size={32} />}
             placeholder="Confirma tu contraseña"
             secureTextEntry
             value={confirmPassword}
@@ -112,7 +136,10 @@ export const Register = ({ navigation }) => {
             inputStyle={{ color: '#fff' }}
             labelStyle={styles.textStyled}
           />
-          <Button title="Registrarse" onPress={handleRegister} />
+          <Button color="#ab8202" onPress={handleRegister}>
+          <MaterialIcons name='assignment-ind' color="#f0f0f0" size={26} />
+            Registrarse
+          </Button>
           <Text style={styles.textStyled}>
             ¿Ya tienes una cuenta?{' '}
             <Text

@@ -2,7 +2,10 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     containerView: {
-        backgroundColor: '#6D5033'
+        backgroundColor: '#161616'
+    },
+    containerView2: {
+        backgroundColor: '#232323'
     },
     dashboardBackground: {
         backgroundColor: '#866037'
@@ -10,6 +13,16 @@ export const styles = StyleSheet.create({
     dashboardText: {
         fontFamily: 'Roboto',
         color: '#fff',
+        fontWeight: 'bold'
+    },
+    textStyled3: {
+        fontFamily: 'Roboto',
+        color: '#f7bb0e',
+        fontWeight: 'bold'
+    },
+    textStyled2: {
+        fontFamily: 'Roboto',
+        color: '#f7bb0e',
         fontWeight: 'bold'
     },
     textStyled: {
@@ -70,8 +83,9 @@ export const styles = StyleSheet.create({
         elevation: 2,
     },
     cardContainer: {
-        backgroundColor: '#997148',
-        borderWidth: 0,
+        backgroundColor: '#232323',
+        borderWidth: 2,
+        borderColor: "#fff"
 
     },
     swiper: {
@@ -110,7 +124,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#6D5033',
+        backgroundColor: '#232323',
     },
     button: {
         width: 150,

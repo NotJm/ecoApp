@@ -1,17 +1,18 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Login } from './Login';
+import { Catalogo } from './Catalogo';
 const Tabs = createMaterialBottomTabNavigator();
 
 export const PreDashboard = () => {
     return (
       <Tabs.Navigator
         initialRouteName='Login'
-        inactiveColor='#e5e5e5'
-        activeColor='#000'
+        inactiveColor='#f7bb03'
+        activeColor='#f9d058'
         sceneAnimationEnabled={true}
-        activeIndicatorStyle={{ backgroundColor: '#edeaea' }}
-        barStyle={{ backgroundColor: '#dddcdc' }}
+        activeIndicatorStyle={{ backgroundColor: '#363636' }}
+        barStyle={{ backgroundColor: '#1d1d1d' }}
       >
         <Tabs.Screen
           name='Login'
@@ -19,21 +20,21 @@ export const PreDashboard = () => {
           options={{
             tabBarLabel: 'Login',
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="origin" color="#000" size={26} />
+              <MaterialCommunityIcons name="origin" color="#f7bb03" size={26} />
             ),
           }}
         />
   
-        {/* <Tabs.Screen
+        <Tabs.Screen
           name='Incubadoras'
           component={Catalogo}
           options={{
             tabBarLabel: 'Incubadoras',
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="device" color="#000" size={26} />
+              <MaterialCommunityIcons name="devices" color="#f7bb0e" size={26} />
             ),
           }}
-        /> */}
+        />
       </Tabs.Navigator>
     )
   }

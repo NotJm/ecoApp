@@ -93,15 +93,10 @@ export const Login = ({ navigation }) => {
             inputStyle={{ color: '#fff' }}
             labelStyle={styles.textStyled}
           />
-          <Button color="error" onPress={handleLogin} >
+          <Button color="#ab8202" onPress={handleLogin} >
             <MaterialCommunityIcons name='login' color="#f0f0f0" size={26} />
             Iniciar Sesion
           </Button>
-          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-            <Text style={[styles.textStyled, { textDecorationLine: 'underline', marginTop: 10 }]}>
-              ¿Olvidaste tu contraseña?
-            </Text>
-          </TouchableOpacity>
           <Text style={styles.textStyled}>
             ¿No tienes una cuenta?{' '}
             <Text
@@ -112,7 +107,6 @@ export const Login = ({ navigation }) => {
           </Text>
         </View>
       </View>
-      <FlashMessage position="bottom" />
     </ImageBackground>
   );
 };

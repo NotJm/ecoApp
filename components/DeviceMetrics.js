@@ -13,7 +13,7 @@ const TemperatureWidget = ({ temperatura }) => (
             maxValue={100}
             radius={80}
             activeStrokeWidth={10}
-            activeStrokeColor={'green'}
+            activeStrokeColor={'#f7bb0e'}
             duration={1000}
             title={`${temperatura} °C`}
             titleColor={'black'}
@@ -30,7 +30,7 @@ const HumidityWidget = ({ humedad }) => (
             maxValue={100}
             radius={80}
             activeStrokeWidth={10}
-            activeStrokeColor={'blue'}
+            activeStrokeColor={'#f7bb0e'}
             duration={1000}
             title={`${humedad}%`}
             titleColor={'black'}
@@ -47,7 +47,7 @@ const AirQualityWidget = ({ mq }) => (
             maxValue={100}
             radius={80}
             activeStrokeWidth={10}
-            activeStrokeColor={'red'}
+            activeStrokeColor={'#f7bb0e'}
             duration={1000}
             title={`${mq} mq`}
             titleColor={'black'}
@@ -90,7 +90,7 @@ export const DeviceMetrics = () => {
     }, []);
 
     return (
-        <ScrollView style={styles.containerView}>
+        <ScrollView style={styles.containerView2}>
             <TemperatureWidget temperatura={sensorData.temperatura} />
             <HumidityWidget humedad={sensorData.humedad} />
             <AirQualityWidget mq={sensorData.mq} />

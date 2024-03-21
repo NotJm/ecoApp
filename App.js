@@ -8,6 +8,7 @@ import { ForgotPassword } from './components/ForgotPassword';
 import { VerifyToken } from './components/Token';
 import { UpdatePassword } from './components/UpdatePassword';
 import { PreDashboard } from './components/PreDashboard';
+import FlashMessage from 'react-native-flash-message';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ const App = () => {
           <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
         </Stack.Navigator>
       </AuthProvider>
+      <FlashMessage position="bottom" />
     </NavigationContainer>
   );
 };

@@ -3,21 +3,23 @@ import { Card } from '@rneui/themed';
 import { styles } from './Styles';
 import { Image, ScrollView, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export const AboutUs = () => {
     return (
         <ScrollView>
             <Header
                 containerStyle={styles.headerContainer}
-                backgroundColor='#866037'
+                backgroundColor='#1d1d1d'
                 centerComponent={
-                    <Text h1 style={styles.textStyled}>Eco-Nido</Text>
+                    <View style={{ display: "flex", flexDirection: "row" }}>
+                        <MaterialIcons name='egg' color="#f7bb0e" size={64} />
+                        <Text h1 style={[styles.textStyled2, { marginTop: 8 }]}>Eco-Nido</Text>
+                    </View>
                 }>
             </Header>
-            {/* <ImageSlider /> */}
             <CardAbout />
             <ContactCard />
-            <SocialMediaCard />
         </ScrollView>
     );
 }
@@ -26,12 +28,12 @@ const CardAbout = () => {
     return (
         <View style={styles.containerView}>
             <Card containerStyle={styles.cardContainer}>
-                <Card.Title style={styles.textStyled} h3>Sobre nosotros</Card.Title>
+                <Card.Title style={styles.textStyled3} h3>Sobre nosotros</Card.Title>
+                <Card.Image style={{ padding: 0, marginTop: 10, marginBottom: 10 }} source={require("../assets/wallpaper.jpg")} />
                 <Card.Divider />
                 <Text style={styles.textStyledMuted}>
                     En Eco-Nido, creemos en la importancia de preservar y fomentar la vida desde su origen más temprano. Nuestra misión es brindar a los clientes herramientas de vanguardia que les permitan participar activamente en el proceso de incubación, ya sea con fines comerciales, educativos o simplemente por el placer de observar el milagro de la vida.
                 </Text>
-                <Card.Image style={{ padding: 0, marginTop: 10, marginBottom: 10 }} source={require("../assets/wallpaper.jpg")} />
             </Card>
 
         </View>
@@ -42,8 +44,8 @@ const ContactCard = () => {
     return (
         <View style={styles.containerView}>
             <Card containerStyle={styles.cardContainer}>
-                <Card.Title style={styles.textStyled}>
-                    <MaterialCommunityIcons name="email" size={24} color="black" />
+                <Card.Title style={styles.textStyled3}>
+                    <MaterialCommunityIcons name="email" size={24} color="white" />
                     {'  '}
                     Contactanos
                 </Card.Title>
@@ -52,12 +54,14 @@ const ContactCard = () => {
                     Estamos aquí para responder a tus preguntas y atender tus necesidades. No dudes en contactarnos a través de los siguientes canales:
                 </Text>
                 <Text style={styles.textStyled}>
-                    <MaterialCommunityIcons name="email" size={18} color="black" /> {'  '}
+                    <MaterialCommunityIcons name="email" size={18} color="white" /> {'  '}
                     Correo Electrónico: info@eco-nido.com
                 </Text>
                 <Text style={styles.textStyled}>
-                    <MaterialCommunityIcons name="phone" size={18} color="black" /> {'  '}
+                    <MaterialCommunityIcons name="phone" size={18} color="white" /> {'  '}
                     Teléfono: +123 456 7890
+                    {'\n'}
+                    
                 </Text>
             </Card>
         </View>

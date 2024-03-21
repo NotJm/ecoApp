@@ -1,5 +1,6 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 // React native components
 import { Home } from './Home';
 import { AboutUs } from './AboutUs';
@@ -12,29 +13,29 @@ export const Dashboard = () => {
     return (
         <Tabs.Navigator
             initialRouteName='Home'
-            inactiveColor='#D2A579'
-            activeColor='#fff'
+            inactiveColor='#f7bb0e'
+            activeColor='#f9d058'
             sceneAnimationEnabled={true}
-            activeIndicatorStyle={{backgroundColor:'#997148'}}
-            barStyle={{ backgroundColor: '#866037' }}
+            activeIndicatorStyle={{backgroundColor:'#363636'}}
+            barStyle={{ backgroundColor: '#1d1d1d' }}
         >
             <Tabs.Screen
-                name='Home'
+                name='Inicio'
                 component={Home}
                 options={{
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'Inicio',
                     tabBarIcon: ({ color }) => (
-                      <MaterialCommunityIcons name="home" color="#F0F0F0" size={26} />
+                      <MaterialCommunityIcons name="home" color="#f7bb0e" size={26} />
                     ),
                   }}
             />
             <Tabs.Screen
-                name='About Us'
+                name='Quienes somos'
                 component={AboutUs}
                 options={{
-                    tabBarLabel: 'About Us',
+                    tabBarLabel: 'Quienes somos',
                     tabBarIcon: ({ color }) => (
-                      <MaterialCommunityIcons name="account-heart" color="#F0F0F0" size={26} />
+                      <MaterialCommunityIcons name="account-heart" color="#f7bb0e" size={26} />
                     ),
                   }}
             />
@@ -44,7 +45,7 @@ export const Dashboard = () => {
                 options={{
                     tabBarLabel: 'EcoNido',
                     tabBarIcon: ({ color }) => (
-                      <MaterialCommunityIcons name="devices" color="#F0F0F0" size={26} />
+                      <MaterialCommunityIcons name="devices" color="#f7bb0e" size={26} />
                     ),
                   }}
             />

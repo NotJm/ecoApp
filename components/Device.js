@@ -6,6 +6,7 @@ import { styles } from './Styles';
 import { DeviceState } from './DeviceState';
 import { DeviceMetrics } from './DeviceMetrics';
 import { useAuth } from './Auth';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -16,11 +17,14 @@ export const Device = () => {
     <View style={{ flex: 1 }}>
       <Header
         containerStyle={styles.headerContainer}
-        backgroundColor='#866037'
+        backgroundColor='#1d1d1d'
         centerComponent={
-          <Text h1 style={styles.textStyled}>Eco-Nido</Text>
-        }
-      />
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <MaterialIcons name='egg' color="#f7bb0e" size={64} />
+            <Text h1 style={[styles.textStyled2, { marginTop: 8 }]}>Eco-Nido</Text>
+          </View>
+        }>
+      </Header>
       {currentMac ? (
         <Tab.Navigator>
           <Tab.Screen
@@ -28,14 +32,14 @@ export const Device = () => {
             component={DeviceState}
             options={{
               tabBarStyle: {
-                backgroundColor: "#997148",
+                backgroundColor: "#1d1d1d",
               },
               tabBarLabelStyle: {
                 color: "#fff",
                 fontWeight: "bold",
               },
               tabBarIndicatorStyle: {
-                backgroundColor: "#D2A579",
+                backgroundColor: "#f0f0f0",
               },
             }}
           />
@@ -44,14 +48,14 @@ export const Device = () => {
             component={DeviceMetrics}
             options={{
               tabBarStyle: {
-                backgroundColor: "#997148",
+                backgroundColor: "#1d1d1d",
               },
               tabBarLabelStyle: {
                 color: "#fff",
                 fontWeight: "bold",
               },
               tabBarIndicatorStyle: {
-                backgroundColor: "#D2A579",
+                backgroundColor: "#f0f0f0",
               },
             }}
           />
