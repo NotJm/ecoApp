@@ -10,11 +10,22 @@ export const DeviceState = () => {
   const [focoState, setFocoState] = useState(false);
   const [ventiladorState, setVentiladorState] = useState(false);
   const [automatico, setAutomatico] = useState(false);
+  const [onlyAutomaticState, setOnlyAutomaticState] = useState(true);
 
   useEffect(() => {
     if (currentMac) {
       cargarEstados();
     }
+
+    // Cargar los estados continuamente
+    const intervalId = setInterval(() => {
+      if (currentMac) {
+        cargarEstados();
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+
   }, [currentMac])
 
   const toggleFoco = async () => {
@@ -48,8 +59,7 @@ export const DeviceState = () => {
 
   const toggleAutomatic = async () => {
     setAutomatico(!automatico);
-    setFocoState(focoState === false ? true : true);
-    setVentiladorState(ventiladorState === true ? false : false);
+    await cargarEstados();
     await enviarDatosAlServidor(automatico ? "automaticDisabled" : "automaticEnable");
   };
 
@@ -83,7 +93,11 @@ export const DeviceState = () => {
 
           setFocoState(light || false);
           setVentiladorState(fan || false);
-          setAutomatico(automatic || false);
+          if (onlyAutomaticState) {
+            setAutomatico(automatic || false);
+            setOnlyAutomaticState(false);;
+          }
+
         });
     } catch (err) {
       console.error(err);
@@ -105,14 +119,14 @@ export const DeviceState = () => {
           style={[styles.button, focoState ? styles.activeButton : null]}
           onPress={toggleFoco}
         >
-          <Text style={styles.buttonText}>Light</Text>
+          <Text style={styles.buttonText}>Foco</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.button, ventiladorState ? styles.activeButton : null]}
           onPress={toggleVentilador}
         >
-          <Text style={styles.buttonText}>Fan</Text>
+          <Text style={styles.buttonText}>Ventilador</Text>
         </TouchableOpacity>
       </View>
     </View>

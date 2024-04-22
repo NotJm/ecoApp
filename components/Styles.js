@@ -145,5 +145,11 @@ export const styles = StyleSheet.create({
     titleProgress : {
         fontSize: 18,
         color: "#fff",
+    },
+    labelSmall : {
+        fontSize: 12,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        color: "#fff"
     }
 })
