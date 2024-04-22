@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useAuth } from './Auth';
-import axios from 'axios';  // Importa Axios
-
-// Asume que 'styles' está definido en './Styles'
+import { showMessage } from 'react-native-flash-message';
+import axios from 'axios';
 import { styles } from './Styles';
 
 export const DeviceState = () => {
-  const { currentUser } = useAuth();
+  const { currentMac } = useAuth();
   const [focoState, setFocoState] = useState(false);
   const [ventiladorState, setVentiladorState] = useState(false);
   const [automatico, setAutomatico] = useState(false);
 
+  useEffect(() => {
+    if (currentMac) {
+      cargarEstados();
+    }
+  }, [currentMac])
+
   const toggleFoco = async () => {
+    if (automatico) {
+      showMessage({
+        message: 'Automatico Activado',
+        description: 'Actualmente se encuentra en modo automatico, si desea controlar el foco deshabilite el automatico',
+        type: 'danger',
+      });
+      return;
+    }
     setFocoState(!focoState);
 
     // Envía el estado actualizado al servidor con Axios
@@ -20,8 +33,15 @@ export const DeviceState = () => {
   };
 
   const toggleVentilador = async () => {
+    if (automatico) {
+      showMessage({
+        message: 'Automatico Activado',
+        description: 'Actualmente se encuentra en modo automatico, si desea controlar el ventilador deshabilite el automatico',
+        type: 'danger',
+      });
+      return;
+    }
     setVentiladorState(!ventiladorState);
-
     // Envía el estado actualizado al servidor con Axios
     await enviarDatosAlServidor(ventiladorState ? 'fanOFF' : 'fanON');
   };
@@ -45,10 +65,8 @@ export const DeviceState = () => {
         }
       );
 
-      console.log('Response:', response);
-
       if (response.status === 200) {
-        console.log(`Datos ${estado === 'lightON' ? 'Encendido' : 'Apagado'} enviados al servidor con éxito`);
+        console.log(`Datos ${estado} enviados al servidor con éxito`);
       } else {
         console.error('Error al enviar datos al servidor:', response.status, response.statusText);
       }
@@ -59,8 +77,7 @@ export const DeviceState = () => {
 
   const cargarEstados = () => {
     try {
-      const { dispositivo } = currentUser;
-      axios.post("https://ecoserver-zopz.onrender.com/device/sensor", { mac: dispositivo })
+      axios.post("https://ecoserver-zopz.onrender.com/device/sensor", { mac: currentMac })
         .then((response) => {
           const { light, fan, automatic } = response.data;
 
@@ -73,9 +90,7 @@ export const DeviceState = () => {
     }
   }
 
-  if (currentUser.dispositivo) {
-    cargarEstados();
-  }
+
 
   return (
     <View style={styles.containerState}>

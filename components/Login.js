@@ -4,7 +4,7 @@ import { Input, Button, Text } from '@rneui/themed';
 import { styles } from './Styles';
 import axios from 'axios';
 import md5 from 'md5';
-import FlashMessage, { showMessage } from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 import { useAuth } from './Auth';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
